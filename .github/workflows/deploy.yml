@@ -20,10 +20,10 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
       - name: ⬇️ Checkout repo
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: ⎔ Setup node
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: 20
 
@@ -41,7 +41,7 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
       - name: ⬇️ Checkout repo
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: ⎔ Setup node
         uses: actions/setup-node@v3
@@ -62,7 +62,7 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
       - name: ⬇️ Checkout repo
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: ⎔ Setup node
         uses: actions/setup-node@v3
@@ -87,7 +87,7 @@ jobs:
     timeout-minutes: 60
     steps:
       - name: ⬇️ Checkout repo
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: 🏄 Copy test env vars
         run: cp .env.example .env
@@ -145,7 +145,7 @@ jobs:
 
     steps:
       - name: ⬇️ Checkout repo
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: 👀 Read app name
         uses: SebRollen/toml-action@v1.0.2

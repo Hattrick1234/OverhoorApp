@@ -65,7 +65,7 @@ export default function Index() {
 						>
 							Getting Started guide
 						</a>{' '}
-						file for how to get your project off the ground! Yes!
+						file for how to get your project off the ground! Yeaha!
 					</p>
 				</div>
 				<ul className="mt-16 flex max-w-3xl flex-wrap justify-center gap-2 sm:gap-4 xl:mt-0 xl:grid xl:grid-flow-col xl:grid-cols-5 xl:grid-rows-6">

@@ -5,7 +5,7 @@ import { readEmail } from '#tests/mocks/utils.ts'
 import { createUser, expect, test as base } from '#tests/playwright-utils.ts'
 
 const URL_REGEX = /(?<url>https?:\/\/[^\s$.?#].[^\s]*)/
-const CODE_REGEX = /Here's your verification code: (?<code>[\d\w]+)/
+const CODE_REGEX = /Hier is je verificatiecode: (?<code>[\d\w]+)/
 function extractUrl(text: string) {
 	const match = text.match(URL_REGEX)
 	return match?.groups?.url
@@ -61,7 +61,7 @@ test('onboarding with link', async ({ page, getOnboardingData }) => {
 	invariant(email, 'Email not found')
 	expect(email.to).toBe(onboardingData.email.toLowerCase())
 	expect(email.from).toBe('onboarding@overhorenapp.nl')
-	expect(email.subject).toMatch(/welcome/i)
+	expect(email.subject).toMatch(/welkom/i)
 	const onboardingUrl = extractUrl(email.text)
 	invariant(onboardingUrl, 'Onboarding URL not found')
 	await page.goto(onboardingUrl)
@@ -121,7 +121,7 @@ test('onboarding with a short code', async ({ page, getOnboardingData }) => {
 	invariant(email, 'Email not found')
 	expect(email.to).toBe(onboardingData.email.toLowerCase())
 	expect(email.from).toBe('onboarding@overhorenapp.nl')
-	expect(email.subject).toMatch(/welcome/i)
+	expect(email.subject).toMatch(/welkom/i)
 	const codeMatch = email.text.match(CODE_REGEX)
 	const code = codeMatch?.groups?.code
 	invariant(code, 'Onboarding code not found')

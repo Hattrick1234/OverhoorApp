@@ -81,8 +81,8 @@ export const links: LinksFunction = () => {
 
 export const meta: MetaFunction<typeof loader> = ({ data }) => {
 	return [
-		{ title: data ? 'Epic Notes' : 'Error | Epic Notes' },
-		{ name: 'description', content: `Your own captain's log` },
+		{ title: data ? 'Overhorenapp' : 'Error | Overhorenapp' },
+		{ name: 'description', content: `Applicatie om woorden mee te overhoren` },
 	]
 }
 
@@ -263,10 +263,10 @@ function Logo() {
 	return (
 		<Link to="/" className="group grid leading-snug">
 			<span className="font-light transition group-hover:-translate-x-1">
-				epic
+				overhoren
 			</span>
 			<span className="font-bold transition group-hover:translate-x-1">
-				notes
+				app
 			</span>
 		</Link>
 	)

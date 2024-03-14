@@ -44,6 +44,7 @@ import { EpicToaster } from './components/ui/sonner.tsx'
 import tailwindStyleSheetUrl from './styles/tailwind.css?url'
 import { getUserId, logout } from './utils/auth.server.ts'
 import { ClientHintCheck, getHints, useHints } from './utils/client-hints.tsx'
+import { APP_NAME } from './utils/constants.ts'
 import { prisma } from './utils/db.server.ts'
 import { getEnv } from './utils/env.server.ts'
 import { honeypot } from './utils/honeypot.server.ts'
@@ -81,7 +82,7 @@ export const links: LinksFunction = () => {
 
 export const meta: MetaFunction<typeof loader> = ({ data }) => {
 	return [
-		{ title: data ? 'Overhorenapp' : 'Error | Overhorenapp' },
+		{ title: data ? `${APP_NAME}` : `Error | ${APP_NAME}` },
 		{ name: 'description', content: `Applicatie om woorden mee te overhoren` },
 	]
 }

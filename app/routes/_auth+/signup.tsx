@@ -17,6 +17,7 @@ import {
 	ProviderConnectionForm,
 	providerNames,
 } from '#app/utils/connections.tsx'
+import { APP_NAME } from '#app/utils/constants.ts'
 import { prisma } from '#app/utils/db.server.ts'
 import { sendEmail } from '#app/utils/email.server.ts'
 import { checkHoneypot } from '#app/utils/honeypot.server.ts'
@@ -66,8 +67,7 @@ export async function action({ request }: ActionFunctionArgs) {
 
 	const response = await sendEmail({
 		to: email,
-		//subject: `Welcome to Epic Notes!`,
-		subject: `Welkom tot de overhoren app!`,
+		subject: `Welkom tot de ${APP_NAME}!`,
 		react: <SignupEmail onboardingUrl={verifyUrl.toString()} otp={otp} />,
 	})
 
@@ -96,7 +96,7 @@ export function SignupEmail({
 		<E.Html lang="en" dir="ltr">
 			<E.Container>
 				<h1>
-					<E.Text>Welkom tot de overhoren app!</E.Text>
+					<E.Text>Welkom tot de ${APP_NAME}!</E.Text>
 				</h1>
 				<p>
 					<E.Text>
@@ -113,7 +113,7 @@ export function SignupEmail({
 }
 
 export const meta: MetaFunction = () => {
-	return [{ title: 'Sign Up | Overhoren app' }]
+	return [{ title: `Sign Up | ${APP_NAME}` }]
 }
 
 export default function SignupRoute() {
@@ -138,7 +138,7 @@ export default function SignupRoute() {
 			<div className="text-center">
 				<h1 className="text-h1">Let's start your journey!</h1>
 				<p className="mt-3 text-body-md text-muted-foreground">
-					Please enter your email.
+					Vul je email in.
 				</p>
 			</div>
 			<div className="mx-auto mt-16 min-w-full max-w-sm sm:min-w-[368px]">
@@ -163,7 +163,7 @@ export default function SignupRoute() {
 						type="submit"
 						disabled={isPending}
 					>
-						Submit
+						Indienen
 					</StatusButton>
 				</Form>
 				<ul className="mt-5 flex flex-col gap-5 border-b-2 border-t-2 border-border py-3">

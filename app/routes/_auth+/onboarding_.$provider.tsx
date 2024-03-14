@@ -31,6 +31,7 @@ import {
 	requireAnonymous,
 } from '#app/utils/auth.server.ts'
 import { ProviderNameSchema } from '#app/utils/connections.tsx'
+import { APP_NAME } from '#app/utils/constants'
 import { prisma } from '#app/utils/db.server.ts'
 import { useIsPending } from '#app/utils/misc.tsx'
 import { authSessionStorage } from '#app/utils/session.server.ts'
@@ -126,7 +127,7 @@ export async function action({ request, params }: ActionFunctionArgs) {
 				ctx.addIssue({
 					path: ['username'],
 					code: z.ZodIssueCode.custom,
-					message: 'A user already exists with this username',
+					message: 'Er bestaat al een gebruiker met deze gebruikersnaam',
 				})
 				return
 			}
@@ -169,13 +170,13 @@ export async function action({ request, params }: ActionFunctionArgs) {
 
 	return redirectWithToast(
 		safeRedirect(redirectTo),
-		{ title: 'Welcome', description: 'Thanks for signing up!' },
+		{ title: 'Welkom', description: 'Bedankt voor het aanmelden!' },
 		{ headers },
 	)
 }
 
 export const meta: MetaFunction = () => {
-	return [{ title: 'Setup Epic Notes Account' }]
+	return [{ title: `Setup ${APP_NAME} Account` }]
 }
 
 export default function SignupRoute() {
@@ -199,9 +200,9 @@ export default function SignupRoute() {
 		<div className="container flex min-h-full flex-col justify-center pb-32 pt-20">
 			<div className="mx-auto w-full max-w-lg">
 				<div className="flex flex-col gap-3 text-center">
-					<h1 className="text-h1">Welcome aboard {data.email}!</h1>
+					<h1 className="text-h1">Welkom aan bord {data.email}!</h1>
 					<p className="text-body-md text-muted-foreground">
-						Please enter your details.
+						Vul je details in alsjeblieft.
 					</p>
 				</div>
 				<Spacer size="xs" />
@@ -218,7 +219,7 @@ export default function SignupRoute() {
 								className="h-24 w-24 rounded-full"
 							/>
 							<p className="text-body-sm text-muted-foreground">
-								You can change your photo later
+								Je kan je foto later veranderen
 							</p>
 							<input {...getInputProps(fields.imageUrl, { type: 'hidden' })} />
 						</div>
@@ -244,8 +245,7 @@ export default function SignupRoute() {
 					<CheckboxField
 						labelProps={{
 							htmlFor: fields.agreeToTermsOfServiceAndPrivacyPolicy.id,
-							children:
-								'Do you agree to our Terms of Service and Privacy Policy?',
+							children: 'Ga je akkoord met Terms of Service en Privacy Policy?',
 						}}
 						buttonProps={getInputProps(
 							fields.agreeToTermsOfServiceAndPrivacyPolicy,
@@ -256,7 +256,7 @@ export default function SignupRoute() {
 					<CheckboxField
 						labelProps={{
 							htmlFor: fields.remember.id,
-							children: 'Remember me',
+							children: 'Deze gegevens onthouden',
 						}}
 						buttonProps={getInputProps(fields.remember, { type: 'checkbox' })}
 						errors={fields.remember.errors}
@@ -275,7 +275,7 @@ export default function SignupRoute() {
 							type="submit"
 							disabled={isPending}
 						>
-							Create an account
+							Maak een account aan
 						</StatusButton>
 					</div>
 				</Form>

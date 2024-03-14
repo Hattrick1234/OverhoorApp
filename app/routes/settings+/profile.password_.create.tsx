@@ -94,7 +94,7 @@ export default function CreatePasswordRoute() {
 	return (
 		<Form method="POST" {...getFormProps(form)} className="mx-auto max-w-md">
 			<Field
-				labelProps={{ children: 'New Password' }}
+				labelProps={{ children: 'Nieuw password' }}
 				inputProps={{
 					...getInputProps(fields.password, { type: 'password' }),
 					autoComplete: 'new-password',
@@ -102,7 +102,7 @@ export default function CreatePasswordRoute() {
 				errors={fields.password.errors}
 			/>
 			<Field
-				labelProps={{ children: 'Confirm New Password' }}
+				labelProps={{ children: 'Bevestig nieuw password' }}
 				inputProps={{
 					...getInputProps(fields.confirmPassword, {
 						type: 'password',

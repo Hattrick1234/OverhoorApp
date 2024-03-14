@@ -12,6 +12,7 @@ import { GeneralErrorBoundary } from '#app/components/error-boundary.tsx'
 import { ErrorList, Field } from '#app/components/forms.tsx'
 import { StatusButton } from '#app/components/ui/status-button.tsx'
 import { requireAnonymous, resetUserPassword } from '#app/utils/auth.server.ts'
+import { APP_NAME } from '#app/utils/constants'
 import { useIsPending } from '#app/utils/misc.tsx'
 import { PasswordAndConfirmPasswordSchema } from '#app/utils/user-validation.ts'
 import { verifySessionStorage } from '#app/utils/verification.server.ts'
@@ -63,7 +64,7 @@ export async function action({ request }: ActionFunctionArgs) {
 }
 
 export const meta: MetaFunction = () => {
-	return [{ title: 'Reset Password | Epic Notes' }]
+	return [{ title: `Reset Password | ${APP_NAME}` }]
 }
 
 export default function ResetPasswordPage() {
@@ -86,7 +87,7 @@ export default function ResetPasswordPage() {
 			<div className="text-center">
 				<h1 className="text-h1">Password Reset</h1>
 				<p className="mt-3 text-body-md text-muted-foreground">
-					Hi, {data.resetPasswordUsername}. No worries. It happens all the time.
+					Hi, {data.resetPasswordUsername}. Geen zorgen. Dit gebeurt vaker.
 				</p>
 			</div>
 			<div className="mx-auto mt-16 min-w-full max-w-sm sm:min-w-[368px]">
@@ -94,7 +95,7 @@ export default function ResetPasswordPage() {
 					<Field
 						labelProps={{
 							htmlFor: fields.password.id,
-							children: 'New Password',
+							children: 'Nieuw password',
 						}}
 						inputProps={{
 							...getInputProps(fields.password, { type: 'password' }),
@@ -106,7 +107,7 @@ export default function ResetPasswordPage() {
 					<Field
 						labelProps={{
 							htmlFor: fields.confirmPassword.id,
-							children: 'Confirm Password',
+							children: 'Bevestig Password',
 						}}
 						inputProps={{
 							...getInputProps(fields.confirmPassword, { type: 'password' }),

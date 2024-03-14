@@ -18,6 +18,7 @@ import {
 	ProviderConnectionForm,
 	providerNames,
 } from '#app/utils/connections.tsx'
+import { APP_NAME } from '#app/utils/constants.ts'
 import { checkHoneypot } from '#app/utils/honeypot.server.ts'
 import { useIsPending } from '#app/utils/misc.tsx'
 import { PasswordSchema, UsernameSchema } from '#app/utils/user-validation.ts'
@@ -48,7 +49,7 @@ export async function action({ request }: ActionFunctionArgs) {
 				if (!session) {
 					ctx.addIssue({
 						code: z.ZodIssueCode.custom,
-						message: 'Invalid username or password',
+						message: 'Ongeldige gebruikersnaam of password',
 					})
 					return z.NEVER
 				}
@@ -96,9 +97,9 @@ export default function LoginPage() {
 		<div className="flex min-h-full flex-col justify-center pb-32 pt-20">
 			<div className="mx-auto w-full max-w-md">
 				<div className="flex flex-col gap-3 text-center">
-					<h1 className="text-h1">Welcome back!</h1>
+					<h1 className="text-h1">Welkom terug!</h1>
 					<p className="text-body-md text-muted-foreground">
-						Please enter your details.
+						Vul je inloggegevens in.
 					</p>
 				</div>
 				<Spacer size="xs" />
@@ -133,7 +134,7 @@ export default function LoginPage() {
 								<CheckboxField
 									labelProps={{
 										htmlFor: fields.remember.id,
-										children: 'Remember me',
+										children: 'Deze gegevens onthouden',
 									}}
 									buttonProps={getInputProps(fields.remember, {
 										type: 'checkbox',
@@ -145,7 +146,7 @@ export default function LoginPage() {
 										to="/forgot-password"
 										className="text-body-xs font-semibold"
 									>
-										Forgot password?
+										Password vergeten?
 									</Link>
 								</div>
 							</div>
@@ -178,7 +179,7 @@ export default function LoginPage() {
 							))}
 						</ul>
 						<div className="flex items-center justify-center gap-2 pt-6">
-							<span className="text-muted-foreground">New here?</span>
+							<span className="text-muted-foreground">Nieuw hier?</span>
 							<Link
 								to={
 									redirectTo
@@ -186,7 +187,7 @@ export default function LoginPage() {
 										: '/signup'
 								}
 							>
-								Create an account
+								Maak een account aan
 							</Link>
 						</div>
 					</div>
@@ -197,7 +198,7 @@ export default function LoginPage() {
 }
 
 export const meta: MetaFunction = () => {
-	return [{ title: 'Login to Epic Notes' }]
+	return [{ title: `Login to ${APP_NAME}` }]
 }
 
 export function ErrorBoundary() {

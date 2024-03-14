@@ -17,6 +17,7 @@ import {
 	requireRecentVerification,
 } from '#app/routes/_auth+/verify.server.ts'
 import { requireUserId } from '#app/utils/auth.server.ts'
+import { APP_NAME } from '#app/utils/constants.ts'
 import { prisma } from '#app/utils/db.server.ts'
 import { sendEmail } from '#app/utils/email.server.ts'
 import { useIsPending } from '#app/utils/misc.tsx'
@@ -62,7 +63,7 @@ export async function action({ request }: ActionFunctionArgs) {
 				ctx.addIssue({
 					path: ['email'],
 					code: z.ZodIssueCode.custom,
-					message: 'This email is already in use.',
+					message: 'Dit emailadres is al in gebruik.',
 				})
 			}
 		}),
@@ -84,7 +85,7 @@ export async function action({ request }: ActionFunctionArgs) {
 
 	const response = await sendEmail({
 		to: submission.value.email,
-		subject: `Epic Notes Email Change Verification`,
+		subject: `${APP_NAME} Email Aanpassing Verificatie`,
 		react: <EmailChangeEmail verifyUrl={verifyUrl.toString()} otp={otp} />,
 	})
 
@@ -121,14 +122,15 @@ export default function ChangeEmailIndex() {
 	return (
 		<div>
 			<h1 className="text-h1">Change Email</h1>
-			<p>You will receive an email at the new email address to confirm.</p>
+			<p>Je ontvangt een email op het nieuwe mailadres om te bevestigen.</p>
 			<p>
-				An email notice will also be sent to your old address {data.user.email}.
+				Een emailnotificatie wordt ook gezonden naar je oude mailadres{' '}
+				{data.user.email}.
 			</p>
 			<div className="mx-auto mt-5 max-w-sm">
 				<Form method="POST" {...getFormProps(form)}>
 					<Field
-						labelProps={{ children: 'New Email' }}
+						labelProps={{ children: 'Nieuw emailadres' }}
 						inputProps={{
 							...getInputProps(fields.email, { type: 'email' }),
 							autoComplete: 'email',
@@ -140,7 +142,7 @@ export default function ChangeEmailIndex() {
 						<StatusButton
 							status={isPending ? 'pending' : form.status ?? 'idle'}
 						>
-							Send Confirmation
+							Verzend Bevestiging
 						</StatusButton>
 					</div>
 				</Form>

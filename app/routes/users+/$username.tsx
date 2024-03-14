@@ -5,6 +5,7 @@ import { GeneralErrorBoundary } from '#app/components/error-boundary.tsx'
 import { Spacer } from '#app/components/spacer.tsx'
 import { Button } from '#app/components/ui/button.tsx'
 import { Icon } from '#app/components/ui/icon.tsx'
+import { APP_NAME } from '#app/utils/constants'
 import { prisma } from '#app/utils/db.server.ts'
 import { getUserImgSrc } from '#app/utils/misc.tsx'
 import { useOptionalUser } from '#app/utils/user.ts'
@@ -75,19 +76,19 @@ export default function ProfileRoute() {
 							<>
 								<Button asChild>
 									<Link to="notes" prefetch="intent">
-										My notes
+										Mijn notities
 									</Link>
 								</Button>
 								<Button asChild>
 									<Link to="/settings/profile" prefetch="intent">
-										Edit profile
+										Wijzig profiel
 									</Link>
 								</Button>
 							</>
 						) : (
 							<Button asChild>
 								<Link to="notes" prefetch="intent">
-									{userDisplayName}'s notes
+									{userDisplayName}'s notities
 								</Link>
 							</Button>
 						)}
@@ -101,10 +102,10 @@ export default function ProfileRoute() {
 export const meta: MetaFunction<typeof loader> = ({ data, params }) => {
 	const displayName = data?.user.name ?? params.username
 	return [
-		{ title: `${displayName} | Epic Notes` },
+		{ title: `${displayName} | ${APP_NAME}` },
 		{
 			name: 'description',
-			content: `Profile of ${displayName} on Epic Notes`,
+			content: `Profile of ${displayName} on ${APP_NAME}`,
 		},
 	]
 }
@@ -114,7 +115,9 @@ export function ErrorBoundary() {
 		<GeneralErrorBoundary
 			statusHandlers={{
 				404: ({ params }) => (
-					<p>No user with the username "{params.username}" exists</p>
+					<p>
+						Geen gebruiker met de gebruikersnaam "{params.username}" bestaat
+					</p>
 				),
 			}}
 		/>

@@ -22,6 +22,7 @@ import { Button } from '#app/components/ui/button.tsx'
 import { Icon } from '#app/components/ui/icon.tsx'
 import { StatusButton } from '#app/components/ui/status-button.tsx'
 import { requireUserId } from '#app/utils/auth.server.ts'
+import { APP_NAME } from '#app/utils/constants.ts'
 import { prisma } from '#app/utils/db.server.ts'
 import { getNoteImgSrc, useIsPending } from '#app/utils/misc.tsx'
 import { requireUserWithPermission } from '#app/utils/permissions.server.ts'
@@ -95,7 +96,7 @@ export async function action({ request }: ActionFunctionArgs) {
 	return redirectWithToast(`/users/${note.owner.username}/notes`, {
 		type: 'success',
 		title: 'Success',
-		description: 'Your note has been deleted.',
+		description: 'Jouw notitie is verwijderd.',
 	})
 }
 
@@ -199,7 +200,7 @@ export const meta: MetaFunction<
 			? data?.note.content.slice(0, 97) + '...'
 			: 'No content'
 	return [
-		{ title: `${noteTitle} | ${displayName}'s Notes | Epic Notes` },
+		{ title: `${noteTitle} | ${displayName}'s Notes | ${APP_NAME}` },
 		{
 			name: 'description',
 			content: noteContentsSummary,
@@ -213,7 +214,7 @@ export function ErrorBoundary() {
 			statusHandlers={{
 				403: () => <p>You are not allowed to do that</p>,
 				404: ({ params }) => (
-					<p>No note with the id "{params.noteId}" exists</p>
+					<p>Geen notitie met id "{params.noteId}" bestaat</p>
 				),
 			}}
 		/>

@@ -13,6 +13,7 @@ import { z } from 'zod'
 import { GeneralErrorBoundary } from '#app/components/error-boundary.tsx'
 import { ErrorList, Field } from '#app/components/forms.tsx'
 import { StatusButton } from '#app/components/ui/status-button.tsx'
+import { APP_NAME } from '#app/utils/constants.ts'
 import { prisma } from '#app/utils/db.server.ts'
 import { sendEmail } from '#app/utils/email.server.ts'
 import { checkHoneypot } from '#app/utils/honeypot.server.ts'
@@ -70,7 +71,7 @@ export async function action({ request }: ActionFunctionArgs) {
 
 	const response = await sendEmail({
 		to: user.email,
-		subject: `Overhoren App Password Reset`,
+		subject: `${APP_NAME} Password Reset`,
 		react: (
 			<ForgotPasswordEmail onboardingUrl={verifyUrl.toString()} otp={otp} />
 		),
@@ -97,7 +98,7 @@ function ForgotPasswordEmail({
 		<E.Html lang="en" dir="ltr">
 			<E.Container>
 				<h1>
-					<E.Text>Overhoren App Password Reset</E.Text>
+					<E.Text>`${APP_NAME} Password Reset`</E.Text>
 				</h1>
 				<p>
 					<E.Text>
@@ -105,7 +106,7 @@ function ForgotPasswordEmail({
 					</E.Text>
 				</p>
 				<p>
-					<E.Text>Or click the link:</E.Text>
+					<E.Text>Of klik op de link:</E.Text>
 				</p>
 				<E.Link href={onboardingUrl}>{onboardingUrl}</E.Link>
 			</E.Container>
@@ -114,7 +115,7 @@ function ForgotPasswordEmail({
 }
 
 export const meta: MetaFunction = () => {
-	return [{ title: 'Password Recovery for Overhoren App' }]
+	return [{ title: `Password Recovery for ${APP_NAME}` }]
 }
 
 export default function ForgotPasswordRoute() {
@@ -134,9 +135,9 @@ export default function ForgotPasswordRoute() {
 		<div className="container pb-32 pt-20">
 			<div className="flex flex-col justify-center">
 				<div className="text-center">
-					<h1 className="text-h1">Forgot Password</h1>
+					<h1 className="text-h1">Password vergeten</h1>
 					<p className="mt-3 text-body-md text-muted-foreground">
-						No worries, we'll send you reset instructions.
+						Geen zorgen we verzenden je herstel instructies.
 					</p>
 				</div>
 				<div className="mx-auto mt-16 min-w-full max-w-sm sm:min-w-[368px]">
@@ -146,7 +147,7 @@ export default function ForgotPasswordRoute() {
 							<Field
 								labelProps={{
 									htmlFor: fields.usernameOrEmail.id,
-									children: 'Username or Email',
+									children: 'Username of Email',
 								}}
 								inputProps={{
 									autoFocus: true,
@@ -168,7 +169,7 @@ export default function ForgotPasswordRoute() {
 								type="submit"
 								disabled={forgotPassword.state !== 'idle'}
 							>
-								Recover password
+								Herstel password
 							</StatusButton>
 						</div>
 					</forgotPassword.Form>
@@ -176,7 +177,7 @@ export default function ForgotPasswordRoute() {
 						to="/login"
 						className="mt-11 text-center text-body-sm font-bold"
 					>
-						Back to Login
+						Terug naar Login
 					</Link>
 				</div>
 			</div>

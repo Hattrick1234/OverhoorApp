@@ -112,7 +112,7 @@ export async function action({ request }: ActionFunctionArgs) {
 		{
 			type: 'success',
 			title: 'Password Changed',
-			description: 'Your password has been changed.',
+			description: 'Je password is veranderd.',
 		},
 		{ status: 302 },
 	)
@@ -135,7 +135,7 @@ export default function ChangePasswordRoute() {
 	return (
 		<Form method="POST" {...getFormProps(form)} className="mx-auto max-w-md">
 			<Field
-				labelProps={{ children: 'Current Password' }}
+				labelProps={{ children: 'Huidig password' }}
 				inputProps={{
 					...getInputProps(fields.currentPassword, { type: 'password' }),
 					autoComplete: 'current-password',
@@ -143,7 +143,7 @@ export default function ChangePasswordRoute() {
 				errors={fields.currentPassword.errors}
 			/>
 			<Field
-				labelProps={{ children: 'New Password' }}
+				labelProps={{ children: 'Nieuw password' }}
 				inputProps={{
 					...getInputProps(fields.newPassword, { type: 'password' }),
 					autoComplete: 'new-password',
@@ -151,7 +151,7 @@ export default function ChangePasswordRoute() {
 				errors={fields.newPassword.errors}
 			/>
 			<Field
-				labelProps={{ children: 'Confirm New Password' }}
+				labelProps={{ children: 'Bevestig nieuw password' }}
 				inputProps={{
 					...getInputProps(fields.confirmNewPassword, {
 						type: 'password',
@@ -169,7 +169,7 @@ export default function ChangePasswordRoute() {
 					type="submit"
 					status={isPending ? 'pending' : form.status ?? 'idle'}
 				>
-					Change Password
+					Verander password
 				</StatusButton>
 			</div>
 		</Form>

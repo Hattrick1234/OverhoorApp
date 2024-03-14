@@ -5,6 +5,7 @@ import {
 	requireRecentVerification,
 	type VerifyFunctionArgs,
 } from '#app/routes/_auth+/verify.server.ts'
+import { APP_NAME } from '#app/utils/constants'
 import { prisma } from '#app/utils/db.server.ts'
 import { sendEmail } from '#app/utils/email.server.ts'
 import { redirectWithToast } from '#app/utils/toast.server.ts'
@@ -49,16 +50,16 @@ export async function handleVerification({
 
 	void sendEmail({
 		to: preUpdateUser.email,
-		subject: 'Epic Stack email changed',
+		subject: `${APP_NAME} email aangepast`,
 		react: <EmailChangeNoticeEmail userId={user.id} />,
 	})
 
 	return redirectWithToast(
 		'/settings/profile',
 		{
-			title: 'Email Changed',
+			title: 'Email aangepast',
 			type: 'success',
-			description: `Your email has been changed to ${user.email}`,
+			description: `Je email is aangepast naar ${user.email}`,
 		},
 		{
 			headers: {
@@ -79,15 +80,15 @@ export function EmailChangeEmail({
 		<E.Html lang="en" dir="ltr">
 			<E.Container>
 				<h1>
-					<E.Text>Epic Notes Email Change</E.Text>
+					<E.Text>`${APP_NAME} Email aanpassing`</E.Text>
 				</h1>
 				<p>
 					<E.Text>
-						Here's your verification code: <strong>{otp}</strong>
+						Hier is je verificatiecode: <strong>{otp}</strong>
 					</E.Text>
 				</p>
 				<p>
-					<E.Text>Or click the link:</E.Text>
+					<E.Text>Of klik op de link:</E.Text>
 				</p>
 				<E.Link href={verifyUrl}>{verifyUrl}</E.Link>
 			</E.Container>
@@ -100,23 +101,22 @@ function EmailChangeNoticeEmail({ userId }: { userId: string }) {
 		<E.Html lang="en" dir="ltr">
 			<E.Container>
 				<h1>
-					<E.Text>Your Epic Notes email has been changed</E.Text>
+					<E.Text>`Je ${APP_NAME} email is veranderd`</E.Text>
 				</h1>
 				<p>
 					<E.Text>
-						We're writing to let you know that your Epic Notes email has been
-						changed.
+						`We informeren je dat je ${APP_NAME} email is veranderd.`
 					</E.Text>
 				</p>
 				<p>
 					<E.Text>
-						If you changed your email address, then you can safely ignore this.
-						But if you did not change your email address, then please contact
-						support immediately.
+						Als je je emailaddes hebt veranderd dan kan je dit bericht negeren.
+						But als je je emailadres niet hebt veranderd, neem dan contact op
+						met de Support.
 					</E.Text>
 				</p>
 				<p>
-					<E.Text>Your Account ID: {userId}</E.Text>
+					<E.Text>Je Account ID: {userId}</E.Text>
 				</p>
 			</E.Container>
 		</E.Html>

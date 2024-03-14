@@ -151,7 +151,7 @@ export default function EditUserProfile() {
 				<div>
 					<Link to={data.hasPassword ? 'password' : 'password/create'}>
 						<Icon name="dots-horizontal">
-							{data.hasPassword ? 'Change Password' : 'Create a Password'}
+							{data.hasPassword ? 'Verander Password' : 'Maak een password aan'}
 						</Icon>
 					</Link>
 				</div>
